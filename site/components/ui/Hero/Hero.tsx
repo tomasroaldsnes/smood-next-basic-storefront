@@ -7,9 +7,10 @@ interface HeroProps {
   className?: string
   headline: string
   description: string
+  cta: string
 }
 
-const Hero: FC<HeroProps> = ({ headline, description }) => {
+const Hero: FC<HeroProps> = ({ headline, description, cta }) => {
   return (
     <div className="bg-accent-9 border-b border-t border-accent-2">
       <Container>
@@ -19,7 +20,7 @@ const Hero: FC<HeroProps> = ({ headline, description }) => {
             <p>{description}</p>
             <Link href="/">
               <a className="flex items-center text-accent-0 pt-3 font-bold hover:underline cursor-pointer w-max-content">
-                Read it here
+                {cta}
                 <ArrowRight width="20" heigh="20" className="ml-1" />
               </a>
             </Link>
