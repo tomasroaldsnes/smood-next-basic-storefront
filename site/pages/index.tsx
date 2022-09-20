@@ -58,7 +58,7 @@ export default function Home({
   return (
     <>
       <Hero
-        headline="We used to hate shaving too"
+        title="We used to hate shaving too"
         description="But now we dont. Get the super bladed something now."
         cta="Purchase now"
       />
