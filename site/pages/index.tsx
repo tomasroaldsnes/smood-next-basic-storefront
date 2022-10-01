@@ -1,8 +1,7 @@
 import commerce from '@lib/api/commerce'
 import { Layout } from '@components/common'
 import { ProductCard } from '@components/product'
-import { Grid, Marquee, Hero } from '@components/ui'
-import { supabase } from '@lib/supabaseClient'
+import { Grid, Marquee, Hero, Content } from '@components/ui'
 // import HomeAllProductsGrid from '@components/common/HomeAllProductsGrid'
 import type { GetStaticPropsContext, InferGetStaticPropsType } from 'next'
 
@@ -25,21 +24,8 @@ export async function getStaticProps({
   const { pages } = await pagesPromise
   const { categories, brands } = await siteInfoPromise
 
-  let { data, error, status } = await supabase
-    .from('profiles')
-    .select(
-      `id, bio_title, bio_description, user_image_url, website_link, twitter_link, instagram_link, youtube_link, facebook_link, snapchat_link, dribbble_link, spotify_link, pinterest_link`
-    )
-    .eq('handle', `thecleantokky`)
-    .single()
-
-  if (error && status !== 406) {
-    throw error
-  }
-
   return {
     props: {
-      data,
       products,
       categories,
       brands,
@@ -51,10 +37,7 @@ export async function getStaticProps({
 
 export default function Home({
   products,
-  data,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  console.log(data)
-  console.log(products)
   return (
     <>
       <Hero
@@ -75,6 +58,14 @@ export default function Home({
           />
         ))}
       </Grid>
+      <Content
+        title="We used to hate shaving too"
+        description="But now we dont. Get the super bladed something now."
+        mediaSize="md"
+        theme="dark"
+        mediaType="video"
+        cta="Purchase now"
+      />
       <Marquee>
         {products.slice(3).map((product: any, i: number) => (
           <ProductCard key={product.id} product={product} variant="slim" />
