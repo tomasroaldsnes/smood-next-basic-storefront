@@ -1,21 +1,35 @@
-import React, { FC } from 'react'
+import React, {
+  CSSProperties,
+  DetailedHTMLProps,
+  FC,
+  HtmlHTMLAttributes,
+} from 'react'
 import { Container } from '@components/ui'
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { ArrowRight } from '@components/icons'
 import Button from '@components/ui/Button'
+import cn from 'clsx'
 import s from './Hero.module.css'
 import Link from 'next/link'
 
 interface Props {
   title?: string
   description?: string
+  customStyle?: React.CSSProperties
   image?: string
   cta?: string
   link?: string
 }
 
-const Hero: FC<Props> = ({ title, description, image, cta, link }) => {
+const Hero: FC<Props> = ({
+  title,
+  description,
+  image,
+  customStyle,
+  cta,
+  link,
+}) => {
   const [width, setWidth] = useState(0)
   useEffect(() => {
     setWidth(window.innerWidth)
@@ -32,7 +46,7 @@ const Hero: FC<Props> = ({ title, description, image, cta, link }) => {
   }, [])
 
   return (
-    <div className="bg-accent-0">
+    <div className="bg-accent-0" style={customStyle}>
       <Container>
         <div className={s.root}>
           <div className={s.content}>
@@ -40,21 +54,21 @@ const Hero: FC<Props> = ({ title, description, image, cta, link }) => {
             <div className={s.description}>
               <p>{description}</p>
             </div>
-            {width > 720 && (
+            {cta && width > 720 && (
               <Button width={320} variant="flat">
-                Click me
+                {cta}
               </Button>
             )}
           </div>
           <div className={s.image}>
             <Image
-              src={'/images/gameboy.png'}
+              src={image || '/images/gameboy.png'}
               alt="Hero title"
               layout="fill"
               objectFit="cover"
             />
           </div>
-          {width < 720 && <Button variant="flat">Click me</Button>}
+          {cta && width < 720 && <Button variant="flat">{cta}</Button>}
         </div>
         {offset < 24 && (
           <div className={s.down}>

@@ -10,7 +10,7 @@
   @apply mt-4 text-xl leading-8 text-accent-7 mb-4 lg:max-w-4xl;
 }
 .image {
-  @apply relative w-full h-[516px];
+  @apply relative w-full h-[563px];
 }
 
 .down {

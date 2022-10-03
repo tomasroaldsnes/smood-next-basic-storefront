@@ -41,8 +41,18 @@ export default function Home({
   return (
     <>
       <Hero
+        title="Snap. Shot. Drop."
+        description="But now we dont. Get the super bladed something now."
+        image="/images/hero-6.jpg"
+        cta="See products"
+      />
+      <Content
         title="We used to hate shaving too"
         description="But now we dont. Get the super bladed something now."
+        mediaSize="md"
+        theme="light"
+        mediaUrl="/images/game-2.jpg"
+        mediaType="image"
         cta="Purchase now"
       />
       <Grid variant="filled">
