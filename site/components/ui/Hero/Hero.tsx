@@ -68,7 +68,7 @@ const Hero: FC<Props> = ({
               objectFit="cover"
             />
           </div>
-          {cta && width < 720 && <Button variant="flat">{cta}</Button>}
+          {cta && width < 720 && <Button variant="ghost">{cta}</Button>}
         </div>
         {offset < 24 && (
           <div className={s.down}>

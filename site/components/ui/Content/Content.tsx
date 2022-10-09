@@ -2,7 +2,6 @@ import React, { FC } from 'react'
 import { Container } from '@components/ui'
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
-import { ArrowRight } from '@components/icons'
 import Button from '@components/ui/Button'
 import cn from 'clsx'
 import Link from 'next/link'
@@ -69,12 +68,13 @@ const Content: FC<Props> = ({
             controls={false}
             autoPlay
             muted
+            playsInline
             className={'h-full w-full object-cover'}
           />
         )}
       </div>
       <Container>
-        <div className={'flex flex-col gap-4 py-16 md:py-32 mx-auto md:ml-2'}>
+        <div className={'flex flex-col gap-4 py-16 md:py-32 mx-auto md:ml-6'}>
           <h2
             className={cn(
               'font-extrabold text-4xl leading-none tracking-tight md:text-6xl md:max-w-xl md:text-left -mt-3',
@@ -94,7 +94,7 @@ const Content: FC<Props> = ({
           {cta && link && (
             <Button
               className="md:max-w-sm"
-              variant={theme === 'dark' ? 'flat' : 'ghost'}
+              variant={theme === 'dark' ? 'ghost' : 'ghost'}
             >
               Click me
             </Button>

@@ -31,6 +31,22 @@
   @apply border border-accent-2 bg-accent-0 text-accent-9 text-sm;
 }
 
+.outline {
+  @apply border-2 border-accent-9 bg-transparent text-accent-9 text-sm;
+}
+
+.outlineSlim {
+  @apply border-2 border-accent-9 bg-transparent text-accent-9 text-sm py-2 transform-none normal-case pl-6 pr-6;
+}
+
+.outlineSlim:hover {
+  @apply border-accent-5;
+}
+
+.outline:hover {
+  @apply border-accent-7 bg-black text-accent-0;
+}
+
 .ghost:hover {
   @apply border-accent-9 bg-accent-9 text-accent-0;
 }

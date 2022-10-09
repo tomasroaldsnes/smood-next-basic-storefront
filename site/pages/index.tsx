@@ -1,7 +1,14 @@
 import commerce from '@lib/api/commerce'
 import { Layout } from '@components/common'
 import { ProductCard } from '@components/product'
-import { Grid, Marquee, Hero, Content } from '@components/ui'
+import {
+  Grid,
+  Marquee,
+  Hero,
+  HeroImage,
+  Content,
+  UserReviews,
+} from '@components/ui'
 // import HomeAllProductsGrid from '@components/common/HomeAllProductsGrid'
 import type { GetStaticPropsContext, InferGetStaticPropsType } from 'next'
 
@@ -40,10 +47,12 @@ export default function Home({
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
-      <Hero
+      <HeroImage
         title="Snap. Shot. Drop."
-        description="But now we dont. Get the super bladed something now."
-        image="/images/hero-6.jpg"
+        image="/images/camera2.jpg"
+        blurPlaceholder="/images/camera2.jpg"
+        imageDesktop="/images/camera3.jpg"
+        blurPlaceholderDesktop="/images/camera3.jpg"
         cta="See products"
       />
       <Content
@@ -75,6 +84,12 @@ export default function Home({
         theme="dark"
         mediaType="video"
         cta="Purchase now"
+      />
+      <UserReviews
+        title="Reviews"
+        description="See what customers are saying about our products."
+        mediaSize="lg"
+        theme="dark"
       />
       <Marquee>
         {products.slice(3).map((product: any, i: number) => (
