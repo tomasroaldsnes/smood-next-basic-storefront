@@ -1,0 +1,36 @@
+.root {
+  @apply flex flex-col gap-4 py-16 mx-auto;
+}
+
+.title {
+  @apply text-accent-9 font-extrabold text-4xl leading-none tracking-tight;
+}
+
+.description {
+  @apply mt-4 text-xl leading-8 text-accent-7 mb-4 lg:max-w-4xl;
+}
+.image {
+  @apply relative w-full h-[563px];
+}
+
+.down {
+  @apply animate-bounce flex justify-center w-full absolute bottom-6 inset-x-0;
+}
+
+@screen md {
+  .root {
+    @apply flex-row items-center justify-center py-32;
+  }
+  .content {
+    @apply flex flex-col;
+  }
+  .title {
+    @apply text-6xl max-w-xl text-left leading-10 -mt-3;
+    line-height: 3.5rem;
+  }
+  .description {
+  }
+  .image {
+    @apply relative w-5/12 h-[720px];
+  }
+}

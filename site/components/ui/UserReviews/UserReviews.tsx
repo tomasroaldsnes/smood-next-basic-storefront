@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { Container } from '@components/ui'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Pagination, Navigation } from 'swiper'
 import styles from './UserReviews.module.css'

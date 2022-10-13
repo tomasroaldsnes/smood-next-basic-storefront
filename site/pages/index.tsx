@@ -8,6 +8,7 @@ import {
   HeroImage,
   Content,
   UserReviews,
+  CollectionSlider,
 } from '@components/ui'
 // import HomeAllProductsGrid from '@components/common/HomeAllProductsGrid'
 import type { GetStaticPropsContext, InferGetStaticPropsType } from 'next'
@@ -44,7 +45,9 @@ export async function getStaticProps({
 
 export default function Home({
   products,
+  categories,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+  console.log(categories)
   return (
     <>
       <HeroImage
@@ -85,6 +88,7 @@ export default function Home({
         mediaType="video"
         cta="Purchase now"
       />
+      <CollectionSlider />
       <UserReviews
         title="Reviews"
         description="See what customers are saying about our products."
