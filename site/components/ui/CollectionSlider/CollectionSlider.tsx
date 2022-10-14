@@ -67,10 +67,15 @@ const CollectionSlider: FC<Props> = ({ collections }) => {
               alt={collection.name}
             />
             <div className="flex flex-col gap-5 justify-center items-left z-10 absolute left-4 bottom-8 lg:left-12 lg:bottom-16 lg:gap-8">
-              <p className="font-bold text-3xl leading-none text-left lg:text-4xl">
+              <p className="font-bold text-3xl text-accent-0 leading-none text-left lg:text-4xl">
                 {collection.name}
               </p>
-              <Button href={collection.path} width={180} variant="outlineSlim">
+              <Button
+                href={collection.path}
+                width={180}
+                theme="light"
+                variant="outlineSlim"
+              >
                 {collection.cta}
               </Button>
             </div>

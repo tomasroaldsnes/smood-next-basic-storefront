@@ -12,6 +12,7 @@ import { LoadingDots } from '@components/ui'
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   href?: string
   className?: string
+  theme?: 'light' | 'dark'
   variant?: 'flat' | 'slim' | 'ghost' | 'naked' | 'outline' | 'outlineSlim'
   active?: boolean
   type?: 'submit' | 'reset' | 'button'
@@ -29,6 +30,7 @@ const Button: React.FC<ButtonProps> = forwardRef((props, buttonRef) => {
     children,
     active,
     width,
+    theme = 'dark',
     loading = false,
     disabled = false,
     style = {},
@@ -48,6 +50,7 @@ const Button: React.FC<ButtonProps> = forwardRef((props, buttonRef) => {
       [s.loading]: loading,
       [s.disabled]: disabled,
     },
+    { [s.light]: theme === 'light' },
     className
   )
 

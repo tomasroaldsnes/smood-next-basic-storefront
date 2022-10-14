@@ -7,6 +7,10 @@
   max-height: 64px;
 }
 
+.light {
+  @apply text-accent-1 border-accent-2 !important;
+}
+
 .root:hover {
   @apply border-accent-9 bg-accent-6;
 }

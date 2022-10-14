@@ -1,0 +1,29 @@
+.root {
+  @apply transition-colors ease-in-out duration-500;
+}
+
+.root .name {
+  @apply pt-0 max-w-full w-full leading-extra-loose;
+  font-size: 2rem;
+  letter-spacing: 0.4px;
+  line-height: 2.1em;
+}
+
+.root .name span {
+  @apply py-1 px-3 text-primary font-bold;
+  font-size: inherit;
+  letter-spacing: inherit;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.root .name span.fontsizing {
+  display: flex;
+  padding-top: 1.5rem;
+}
+
+.root .price {
+  @apply px-3 pb-4 text-[12px] text-accent-9
+  font-medium inline-block tracking-wide;
+  margin-top: -1px;
+}

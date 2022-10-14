@@ -1,6 +1,6 @@
 import commerce from '@lib/api/commerce'
 import { Layout } from '@components/common'
-import { ProductCard } from '@components/product'
+import { SmoodProductCard } from '@components/product'
 import {
   Grid,
   Marquee,
@@ -67,9 +67,9 @@ export default function Home({
         mediaType="image"
         cta="Purchase now"
       />
-      <Grid variant="filled">
-        {products.slice(0, 3).map((product: any, i: number) => (
-          <ProductCard
+      <Grid layout="products" variant="default">
+        {products.slice(0, 4).map((product: any, i: number) => (
+          <SmoodProductCard
             key={product.id}
             product={product}
             imgProps={{

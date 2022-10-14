@@ -15,6 +15,10 @@
   @apply gap-3;
 }
 
+.layoutProducts {
+  @apply grid-cols-2 gap-0 bg-accent-1;
+}
+
 .layoutA {
   & > *:nth-child(6n + 1),
   & > *:nth-child(6n + 5) {

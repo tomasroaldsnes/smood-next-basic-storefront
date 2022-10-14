@@ -1,8 +1,8 @@
 {
   "features": {
     "cart": true,
-    "search": false,
-    "wishlist": false,
+    "search": true,
+    "wishlist": true,
     "customerAuth": false,
     "customCheckout": false
   }

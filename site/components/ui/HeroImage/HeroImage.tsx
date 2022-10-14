@@ -107,10 +107,10 @@ const HeroImage: FC<Props> = ({
         />
       )}
       <div className="flex flex-col gap-5 justify-center items-left z-10 absolute left-4 bottom-8 lg:left-12 lg:bottom-16 lg:gap-8">
-        <p className="font-bold text-3xl leading-none text-left lg:text-6xl">
+        <p className="font-bold text-3xl text-accent-1 leading-none text-left lg:text-6xl">
           {title}
         </p>
-        <Button width={150} variant="outlineSlim">
+        <Button theme="light" width={150} variant="outlineSlim">
           {cta}
         </Button>
       </div>
