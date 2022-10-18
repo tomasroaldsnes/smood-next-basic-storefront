@@ -7,6 +7,11 @@ import Image, { ImageProps } from 'next/image'
 import WishlistButton from '@components/wishlist/WishlistButton'
 import usePrice from '@framework/product/use-price'
 import ProductTag from '../SmoodProductTag'
+import Swatch from '../Swatch'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { Pagination } from 'swiper'
+import 'swiper/css'
+import 'swiper/css/pagination'
 
 interface Props {
   className?: string
@@ -39,40 +44,64 @@ const ProductCard: FC<Props> = ({
     /* { [s.slim]: variant === 'slim', [s.simple]: variant === 'simple' }, */
     className
   )
-
+  console.log(product)
   return (
-    <Link href={`/product/${product.slug}`}>
-      <a className={rootClassName} aria-label={product.name}>
-        {variant === 'default' && (
-          <>
-            {process.env.COMMERCE_WISHLIST_ENABLED && (
-              <WishlistButton
-                className={s.wishlistButton}
-                productId={product.id}
-                variant={product.variants[0] as any}
-              />
-            )}
-            <ProductTag name={product.name} price={`${price}`} />
-            <div className={s.imageContainer}>
-              {product?.images && (
-                <div>
-                  <Image
-                    alt={product.name || 'Product Image'}
-                    className={s.productImage}
-                    src={product.images[0]?.url || placeholderImg}
-                    height={540}
-                    width={540}
-                    quality="85"
-                    layout="responsive"
-                    {...imgProps}
-                  />
-                </div>
+    <>
+      <Link href={`/product/${product.slug}`}>
+        <a className={rootClassName} aria-label={product.name}>
+          {variant === 'default' && (
+            <>
+              {process.env.COMMERCE_WISHLIST_ENABLED && (
+                <WishlistButton
+                  className={s.wishlistButton}
+                  productId={product.id}
+                  variant={product.variants[0] as any}
+                />
               )}
-            </div>
-          </>
-        )}
-      </a>
-    </Link>
+              <ProductTag name={product.name} price={`${price}`} />
+              <Swiper
+                slidesPerView={1}
+                pagination={{
+                  dynamicBullets: true,
+                }}
+                effect={'slide'}
+                modules={[Pagination]}
+                className="mySwiper"
+              >
+                {product.images.map((image) => (
+                  <SwiperSlide>
+                    <div className={s.imageContainer}>
+                      <div>
+                        <Image
+                          alt={product.name || 'Product Image'}
+                          className={s.productImage}
+                          src={image?.url || placeholderImg}
+                          height={540}
+                          width={540}
+                          quality="85"
+                          layout="responsive"
+                          {...imgProps}
+                        />
+                      </div>
+                    </div>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </>
+          )}
+          <div className="flex flex-row gap-2 px-3 py-2 mt-3">
+            {product.options
+              .find((opt) => opt.displayName === 'color')
+              ?.values.map((v) => (
+                <span
+                  className="w-3 h-3 border-[1px] border-accent-9 rounded-full"
+                  style={{ backgroundColor: v.hexColors ? v.hexColors[0] : '' }}
+                ></span>
+              ))}
+          </div>
+        </a>
+      </Link>
+    </>
   )
 }
 

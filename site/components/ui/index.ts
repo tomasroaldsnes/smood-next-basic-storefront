@@ -1,6 +1,6 @@
 export { default as Hero } from './Hero'
 export { default as HeroImage } from './HeroImage'
-export { default as CollectionSlider } from './CollectionSlider'
+export { default as CollectionSlider } from './SmoodCollectionSlider'
 export { default as Logo } from './Logo'
 export { default as Grid } from './Grid'
 export { default as Content } from './Content'

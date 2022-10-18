@@ -110,7 +110,7 @@ const HeroImage: FC<Props> = ({
         <p className="font-bold text-3xl text-accent-1 leading-none text-left lg:text-6xl">
           {title}
         </p>
-        <Button theme="light" width={150} variant="outlineSlim">
+        <Button theme="light" variant="outlineSlim">
           {cta}
         </Button>
       </div>

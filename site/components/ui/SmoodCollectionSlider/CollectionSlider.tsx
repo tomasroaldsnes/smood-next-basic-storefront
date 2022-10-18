@@ -72,7 +72,7 @@ const CollectionSlider: FC<Props> = ({ collections }) => {
               </p>
               <Button
                 href={collection.path}
-                width={180}
+                width={150}
                 theme="light"
                 variant="outlineSlim"
               >

@@ -1,6 +1,6 @@
 .root {
   @apply sticky top-0 z-40 transition-all duration-150;
-  min-height: 74px;
+  min-height: 64px;
 }
 
 .nav {
@@ -9,6 +9,12 @@
 
 .navMenu {
   @apply hidden ml-6 space-x-4 lg:block;
+}
+
+.navTopWhite {
+  button {
+    color: #fff;
+  }
 }
 
 .link {

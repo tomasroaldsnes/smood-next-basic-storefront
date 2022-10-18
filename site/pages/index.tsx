@@ -3,12 +3,11 @@ import { Layout } from '@components/common'
 import { SmoodProductCard } from '@components/product'
 import {
   Grid,
-  Marquee,
-  Hero,
   HeroImage,
   Content,
   UserReviews,
   CollectionSlider,
+  Container,
 } from '@components/ui'
 // import HomeAllProductsGrid from '@components/common/HomeAllProductsGrid'
 import type { GetStaticPropsContext, InferGetStaticPropsType } from 'next'
@@ -23,18 +22,27 @@ export async function getStaticProps({
     variables: { first: 6 },
     config,
     preview,
-    // Saleor provider only
-    ...({ featured: true } as any),
   })
+
   const pagesPromise = commerce.getAllPages({ config, preview })
   const siteInfoPromise = commerce.getSiteInfo({ config, preview })
   const { products } = await productsPromise
+  const [...productDetails] = await Promise.all(
+    products.map((product) =>
+      commerce.getProduct({
+        variables: { slug: product!.slug || '' },
+        config,
+        preview,
+      })
+    )
+  )
   const { pages } = await pagesPromise
   const { categories, brands } = await siteInfoPromise
 
   return {
     props: {
       products,
+      productDetails,
       categories,
       brands,
       pages,
@@ -45,9 +53,8 @@ export async function getStaticProps({
 
 export default function Home({
   products,
-  categories,
+  productDetails,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  console.log(categories)
   return (
     <>
       <HeroImage
@@ -68,10 +75,10 @@ export default function Home({
         cta="Purchase now"
       />
       <Grid layout="products" variant="default">
-        {products.slice(0, 4).map((product: any, i: number) => (
+        {productDetails.slice(0, 4).map((p: any, i: number) => (
           <SmoodProductCard
-            key={product.id}
-            product={product}
+            key={p.product.id}
+            product={p.product}
             imgProps={{
               width: i === 0 ? 1080 : 540,
               height: i === 0 ? 1080 : 540,
@@ -95,16 +102,6 @@ export default function Home({
         mediaSize="lg"
         theme="dark"
       />
-      <Marquee>
-        {products.slice(3).map((product: any, i: number) => (
-          <ProductCard key={product.id} product={product} variant="slim" />
-        ))}
-      </Marquee>
-      {/* <HomeAllProductsGrid
-        newestProducts={products}
-        categories={categories}
-        brands={brands}
-      /> */}
     </>
   )
 }

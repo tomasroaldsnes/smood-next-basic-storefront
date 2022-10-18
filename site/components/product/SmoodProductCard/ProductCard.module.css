@@ -1,6 +1,6 @@
 .root {
-  @apply relative max-h-full border-r-[0.5px] border-accent-3 w-full box-border overflow-hidden
-  bg-no-repeat bg-center bg-cover transition-transform
+  @apply relative max-h-full border-r-[0.5px] border-b-[0.5px] border-accent-3 w-full box-border overflow-hidden
+  bg-no-repeat bg-center bg-cover transition-transform py-3
   ease-linear cursor-pointer inline-block;
   height: 100% !important;
 }
@@ -69,7 +69,7 @@
 }
 
 .imageContainer {
-  @apply flex items-center justify-center overflow-hidden;
+  @apply flex items-center justify-center overflow-hidden px-3;
 }
 
 .imageContainer > div {
