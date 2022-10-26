@@ -16,7 +16,7 @@
 }
 
 .layoutProducts {
-  @apply grid-cols-2 gap-0 bg-accent-1;
+  @apply grid-cols-2 gap-0 bg-accent-1 lg:grid-cols-4;
 }
 
 .layoutA {
@@ -125,7 +125,7 @@
 
 @screen lg {
   .root {
-    @apply grid-cols-3 grid-rows-2;
+    @apply grid-cols-4 grid-rows-1;
   }
 
   .root > * {

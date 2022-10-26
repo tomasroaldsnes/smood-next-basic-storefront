@@ -4,6 +4,7 @@ import s from './Navbar.module.css'
 import throttle from 'lodash.throttle'
 import { Logo, Container, Button } from '@components/ui'
 import { Searchbar, UserNav } from '@components/common'
+import { useRouter } from 'next/router'
 import cn from 'clsx'
 interface Link {
   href: string
@@ -15,6 +16,7 @@ interface NavbarProps {
   links?: Link[]
 }
 const Navbar: FC<NavbarProps> = ({ scrolled, links }) => {
+  const router = useRouter()
   const [search, setSearch] = useState<boolean>(false)
   const [hasScrolled, setHasScrolled] = useState(false)
 
@@ -34,13 +36,16 @@ const Navbar: FC<NavbarProps> = ({ scrolled, links }) => {
       document.removeEventListener('scroll', handleScroll)
     }
   }, [hasScrolled])
+  console.log(router.asPath === '/' && !hasScrolled)
 
   return (
     <div
       className={cn(
         s.root,
         { 'shadow-magical': hasScrolled },
-        hasScrolled || search ? 'bg-primary' : 'bg-transparent'
+        router.asPath === '/' && !hasScrolled && !search
+          ? 'bg-transparent'
+          : 'bg-primary'
       )}
     >
       <Container clean className="mx-auto max-w-8xl px-6">
@@ -48,7 +53,11 @@ const Navbar: FC<NavbarProps> = ({ scrolled, links }) => {
           <div className="flex items-center flex-1">
             <Link href="/">
               <a className={s.logo} aria-label="Logo">
-                <Logo color={hasScrolled || search ? 'black' : 'white'} />
+                <Logo
+                  color={
+                    router.asPath === '/' && !hasScrolled ? 'white' : 'black'
+                  }
+                />
               </a>
             </Link>
             {scrolled && (
@@ -72,14 +81,20 @@ const Navbar: FC<NavbarProps> = ({ scrolled, links }) => {
               </div>
             ) : (
               <Button variant="naked" onClick={() => setSearch(!search)}>
-                {hasScrolled ? (
-                  <img src="/images/icons/search.svg" />
-                ) : (
+                {router.asPath === '/' && !hasScrolled ? (
                   <img src="/images/icons/search-white.svg" />
+                ) : (
+                  <img src="/images/icons/search.svg" />
                 )}
               </Button>
             )}
-            <UserNav className={!hasScrolled && !search ? s.navTopWhite : ''} />
+            <UserNav
+              className={
+                router.asPath === '/' && !hasScrolled && !search
+                  ? s.navTopWhite
+                  : ''
+              }
+            />
           </div>
         </div>
         {process.env.COMMERCE_SEARCH_ENABLED && search && (

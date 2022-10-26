@@ -153,8 +153,10 @@ const UserReviews: FC<Props> = ({
                   </button>
                   <div className={styles.product}>
                     <span>
-                      <strong>{review.product}</strong>
-                      <p>{review.description}</p>
+                      <strong className="text-accent-1">
+                        {review.product}
+                      </strong>
+                      <p className="text-accent-1">{review.description}</p>
                     </span>
                     <Button
                       variant="slim"
