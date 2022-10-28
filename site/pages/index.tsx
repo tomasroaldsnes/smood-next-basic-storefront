@@ -66,13 +66,18 @@ export default function Home({
         cta="See products"
       />
       <Content
-        title="We used to hate shaving too"
-        description="But now we dont. Get the super bladed something now."
+        title="Free shipping available.
+        100 day free returns.
+        Limited lifetime warranty."
+        description="We're passionate about our products and want you to be as well. If you buy one and it's not for you, you can return it with full refund."
         mediaSize="md"
-        theme="light"
-        mediaUrl="/images/game-2.jpg"
+        mediaUrl="/images/camera4.jpg"
+        theme="dark"
         mediaType="image"
-        cta="Purchase now"
+      />
+      <Content
+        title="Our best sellers"
+        description="The most popular cameras for every adventure."
       />
       <Grid layout="products" variant="default">
         {productDetails.slice(0, 4).map((p: any, i: number) => (
@@ -87,20 +92,22 @@ export default function Home({
           />
         ))}
       </Grid>
-      <Content
-        title="We used to hate shaving too"
-        description="But now we dont. Get the super bladed something now."
-        mediaSize="md"
-        theme="dark"
-        mediaType="video"
-        cta="Purchase now"
-      />
       <CollectionSlider />
       <UserReviews
         title="Reviews"
         description="See what customers are saying about our products."
         mediaSize="lg"
         theme="dark"
+      />
+      <Content
+        title="Free shipping available.
+        100 day free returns.
+        Limited lifetime warranty."
+        description="We're passionate about our products and want you to be as well. If you buy one and it's not for you, you can return it with full refund."
+        mediaSize="md"
+        mediaUrl="/images/camera4.jpg"
+        theme="dark"
+        mediaType="image"
       />
     </>
   )

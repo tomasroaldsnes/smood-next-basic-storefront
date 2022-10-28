@@ -24,8 +24,8 @@ const Content: FC<Props> = ({
   mediaSize = 'sm',
   mediaType = 'image',
   theme = 'light',
-  cta = 'Click me',
-  link = '#',
+  cta,
+  link,
 }) => {
   const [width, setWidth] = useState(0)
   useEffect(() => {
@@ -36,49 +36,56 @@ const Content: FC<Props> = ({
     <div
       className={cn(
         'md:flex md:flex-row',
-        theme === 'dark' ? 'bg-accent-0' : 'bg-accent-8'
+        theme === 'dark' ? 'bg-accent-8' : 'bg-accent-0'
       )}
     >
-      <div
-        className={cn(
-          'relative w-full',
-          mediaSize === 'sm'
-            ? 'h-[30vh]'
-            : mediaSize === 'md'
-            ? 'h-[40vh]'
-            : mediaSize === 'lg'
-            ? 'h-[60vh]'
-            : '',
-          'md:h-auto'
-        )}
-      >
-        {mediaType === 'image' ? (
-          <Image
-            src={mediaUrl || '/images/game-1.jpg'}
-            alt="Hero title"
-            layout="fill"
-            objectFit="cover"
-          />
-        ) : (
-          <video
-            src={
-              mediaUrl ||
-              'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'
-            }
-            controls={false}
-            autoPlay
-            muted
-            playsInline
-            className={'h-full w-full object-cover'}
-          />
-        )}
-      </div>
+      {mediaUrl && (
+        <div
+          className={cn(
+            'relative w-full',
+            mediaSize === 'sm'
+              ? 'h-[30vh]'
+              : mediaSize === 'md'
+              ? 'h-[40vh]'
+              : mediaSize === 'lg'
+              ? 'h-[60vh]'
+              : '',
+            'md:h-auto'
+          )}
+        >
+          {mediaType === 'image' ? (
+            <Image
+              src={mediaUrl || '/images/game-1.jpg'}
+              alt="Hero title"
+              layout="fill"
+              objectFit="cover"
+            />
+          ) : (
+            <video
+              src={
+                mediaUrl ||
+                'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'
+              }
+              controls={false}
+              autoPlay
+              muted
+              playsInline
+              className={'h-full w-full object-cover'}
+            />
+          )}
+        </div>
+      )}
       <Container>
-        <div className={'flex flex-col gap-4 py-16 md:py-32 mx-auto md:ml-6'}>
+        <div
+          className={cn(
+            'flex flex-col gap-4 md:py-32 mx-auto md:ml-6',
+            mediaUrl ? 'py-16' : 'py-12'
+          )}
+        >
           <h2
             className={cn(
-              'font-extrabold text-4xl leading-none tracking-tight md:text-6xl md:max-w-xl md:text-left -mt-3',
-              theme === 'dark' ? 'text-accent-9' : 'text-accent-1'
+              'font-extrabold text-4xl leading-none tracking-tight md:text-6xl md:max-w-xl md:text-left lg:-mt-3',
+              theme === 'dark' ? 'text-accent-1' : 'text-accent-9'
             )}
           >
             {title}
@@ -86,7 +93,7 @@ const Content: FC<Props> = ({
           <div
             className={cn(
               'mt-4 text-xl leading-8 text-accent-7 mb-4 lg:max-w-4xl',
-              theme === 'dark' ? 'text-accent-7' : 'text-accent-2'
+              theme === 'dark' ? 'text-accent-2' : 'text-accent-7'
             )}
           >
             <p>{description}</p>

@@ -13,11 +13,13 @@
 }
 
 .sliderContainer {
-  @apply flex items-center justify-center overflow-x-hidden bg-violet;
+  @apply flex items-center justify-center overflow-x-hidden bg-accent-1;
 }
 
 .imageContainer {
   @apply text-center h-full relative;
+  height: 400px;
+  width: 100%;
 }
 
 .imageContainer > span {
@@ -54,6 +56,7 @@
   }
 
   .imageContainer {
-    max-height: 600px;
+    height: 65vh;
+    width: 100%;
   }
 }
