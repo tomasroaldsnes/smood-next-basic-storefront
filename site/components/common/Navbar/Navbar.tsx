@@ -36,14 +36,15 @@ const Navbar: FC<NavbarProps> = ({ scrolled, links }) => {
       document.removeEventListener('scroll', handleScroll)
     }
   }, [hasScrolled])
-  console.log(router.asPath === '/' && !hasScrolled)
 
   return (
     <div
       className={cn(
         s.root,
         { 'shadow-magical': hasScrolled },
-        router.asPath === '/' && !hasScrolled && !search
+        (router.asPath === '/' || router.asPath.includes('/campaign/')) &&
+          !hasScrolled &&
+          !search
           ? 'bg-transparent'
           : 'bg-primary'
       )}
@@ -55,7 +56,11 @@ const Navbar: FC<NavbarProps> = ({ scrolled, links }) => {
               <a className={s.logo} aria-label="Logo">
                 <Logo
                   color={
-                    router.asPath === '/' && !hasScrolled ? 'white' : 'black'
+                    (router.asPath === '/' ||
+                      router.asPath.includes('/campaign/')) &&
+                    !hasScrolled
+                      ? 'white'
+                      : 'black'
                   }
                 />
               </a>
@@ -81,7 +86,9 @@ const Navbar: FC<NavbarProps> = ({ scrolled, links }) => {
               </div>
             ) : (
               <Button variant="naked" onClick={() => setSearch(!search)}>
-                {router.asPath === '/' && !hasScrolled ? (
+                {(router.asPath === '/' ||
+                  router.asPath.includes('/campaign/')) &&
+                !hasScrolled ? (
                   <img src="/images/icons/search-white.svg" />
                 ) : (
                   <img src="/images/icons/search.svg" />
@@ -90,7 +97,10 @@ const Navbar: FC<NavbarProps> = ({ scrolled, links }) => {
             )}
             <UserNav
               className={
-                router.asPath === '/' && !hasScrolled && !search
+                (router.asPath === '/' ||
+                  router.asPath.includes('/campaign/')) &&
+                !hasScrolled &&
+                !search
                   ? s.navTopWhite
                   : ''
               }

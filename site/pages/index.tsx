@@ -9,8 +9,21 @@ import {
   CollectionSlider,
   Container,
 } from '@components/ui'
-// import HomeAllProductsGrid from '@components/common/HomeAllProductsGrid'
+import { Data, HeroType, ContentType, UserReviewType } from 'types'
 import type { GetStaticPropsContext, InferGetStaticPropsType } from 'next'
+
+const baseUrl =
+  process.env.NODE_ENV === 'production'
+    ? process.env.API_CMS_URL
+    : process.env.LOCALHOST_CMS_URL
+
+const cms_bearer = process.env.CMS_BEARER_TOKEN || ''
+
+let _headers: HeadersInit = {
+  Accept: 'application/json',
+  'Content-Type': 'application/json',
+  Authorization: `Bearer ${cms_bearer}`,
+}
 
 export async function getStaticProps({
   preview,
@@ -36,11 +49,16 @@ export async function getStaticProps({
       })
     )
   )
+  /*  const homepage_res = await fetch(`${baseUrl}/api/homepage?populate=deep,10`, {
+    headers: _headers,
+  })
+  const { homepage } = await homepage_res.json() */
   const { pages } = await pagesPromise
   const { categories, brands } = await siteInfoPromise
 
   return {
     props: {
+      //homepage,
       products,
       productDetails,
       categories,
@@ -52,9 +70,11 @@ export async function getStaticProps({
 }
 
 export default function Home({
+  //homepage,
   products,
   productDetails,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+  //console.log(homepage)
   return (
     <>
       <HeroImage
@@ -93,12 +113,12 @@ export default function Home({
         ))}
       </Grid>
       <CollectionSlider />
-      <UserReviews
+      {/* <UserReviews
         title="Reviews"
         description="See what customers are saying about our products."
         mediaSize="lg"
         theme="dark"
-      />
+      /> */}
       <Content
         title="Free shipping available.
         100 day free returns.

@@ -10,6 +10,9 @@ const isVendure = provider === '@vercel/commerce-vendure'
 
 module.exports = withCommerceConfig({
   commerce,
+  images: {
+    domains: [process.env.AWS_ASSET_DOMAIN],
+  },
   i18n: {
     locales: ['en-US', 'es'],
     defaultLocale: 'en-US',

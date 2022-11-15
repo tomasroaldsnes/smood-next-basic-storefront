@@ -1,8 +1,7 @@
 import React, { FC } from 'react'
-import { Container } from '@components/ui'
+import { Container, Button } from '@components/ui'
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
-import Button from '@components/ui/Button'
 import cn from 'clsx'
 import Link from 'next/link'
 
@@ -10,6 +9,7 @@ interface Props {
   title?: string
   description?: string
   mediaUrl?: string
+  reverse?: boolean
   mediaType?: 'image' | 'video'
   mediaSize?: 'sm' | 'md' | 'lg'
   theme?: 'dark' | 'light'
@@ -21,6 +21,7 @@ const Content: FC<Props> = ({
   title,
   description,
   mediaUrl,
+  reverse = false,
   mediaSize = 'sm',
   mediaType = 'image',
   theme = 'light',
@@ -36,6 +37,7 @@ const Content: FC<Props> = ({
     <div
       className={cn(
         'md:flex md:flex-row',
+        reverse ? 'lg:flex-row-reverse' : '',
         theme === 'dark' ? 'bg-accent-8' : 'bg-accent-0'
       )}
     >
@@ -50,7 +52,7 @@ const Content: FC<Props> = ({
               : mediaSize === 'lg'
               ? 'h-[60vh]'
               : '',
-            'md:h-auto'
+            'md:h-[632px]'
           )}
         >
           {mediaType === 'image' ? (
@@ -68,6 +70,7 @@ const Content: FC<Props> = ({
               }
               controls={false}
               autoPlay
+              loop
               muted
               playsInline
               className={'h-full w-full object-cover'}
@@ -103,7 +106,7 @@ const Content: FC<Props> = ({
               className="md:max-w-sm"
               variant={theme === 'dark' ? 'ghost' : 'ghost'}
             >
-              Click me
+              {cta}
             </Button>
           )}
         </div>

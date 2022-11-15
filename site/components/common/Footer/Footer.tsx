@@ -34,7 +34,7 @@ const Footer: FC<Props> = ({ className, pages }) => {
             <Link href="/">
               <a className="flex flex-initial items-center font-bold md:mr-24">
                 <span className={s.logo}>
-                  <Logo />
+                  <Logo color="#000" />
                 </span>
               </a>
             </Link>
@@ -54,35 +54,13 @@ const Footer: FC<Props> = ({ className, pages }) => {
           </div>
           <div className="col-span-1 lg:col-span-2 flex items-start lg:justify-end text-primary">
             <div className="flex space-x-6 items-center h-10">
-              <a
-                className={s.link}
-                aria-label="Github Repository"
-                href="https://github.com/vercel/commerce"
-              >
-                <Github />
-              </a>
               <I18nWidget />
             </div>
           </div>
         </div>
         <div className="pt-6 pb-10 flex flex-col md:flex-row justify-between items-center space-y-4 text-accent-6 text-sm">
           <div>
-            <span>&copy; 2020 ACME, Inc. All rights reserved.</span>
-          </div>
-          <div className="flex items-center text-primary text-sm">
-            <span className="text-primary">Created by</span>
-            <a
-              rel="noopener noreferrer"
-              href="https://vercel.com"
-              aria-label="Vercel.com Link"
-              target="_blank"
-              className="text-primary"
-            >
-              <Vercel
-                className="inline-block h-6 ml-3 text-primary"
-                alt="Vercel.com Logo"
-              />
-            </a>
+            <span>&copy; 2022 SMOOD COMMERCE, Inc. No rights reserved.</span>
           </div>
         </div>
       </Container>

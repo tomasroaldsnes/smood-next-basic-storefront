@@ -1,4 +1,5 @@
 import React, { FC } from 'react'
+import { Review } from 'types'
 import { Container } from '@components/ui'
 import { useState, useEffect } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -8,62 +9,30 @@ import ReactPlayer from 'react-player'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
-import Image from 'next/image'
-import Button from '@components/ui/Button'
+import Button from 'components/ui/Button'
 import cn from 'clsx'
-import Link from 'next/link'
-
-const reviews = [
-  {
-    video: '/videos/user1.mp4',
-    product: 'Canon R6',
-    description: 'Our best allrounder',
-  },
-  {
-    video: '/videos/review1.mp4',
-    product: 'Canon R5',
-    description: 'Our best allrounder',
-  },
-  {
-    video: '/videos/user3.mp4',
-    product: 'Canon R5',
-    description: 'Our best allrounder',
-  },
-]
 
 interface Props {
   title?: string
   description?: string
-  mediaUrl?: string
-  mediaType?: 'image' | 'video'
   mediaSize?: 'sm' | 'md' | 'lg'
   theme?: 'dark' | 'light'
-  cta?: string
-  link?: string
+  reviews: Array<Review>
 }
 
 const UserReviews: FC<Props> = ({
   title,
   description,
-  mediaUrl,
   mediaSize = 'sm',
-  mediaType = 'image',
   theme = 'light',
-  cta = 'Click me',
-  link = '#',
+  reviews,
 }) => {
-  const [width, setWidth] = useState(0)
-  useEffect(() => {
-    setWidth(window.innerWidth)
-  }, [width])
-
   const [isMuted, setIsMuted] = useState(true)
-
   return (
     <div
       className={cn(
         'md:flex md:flex-row',
-        theme === 'dark' ? 'bg-accent-0' : 'bg-accent-8'
+        theme === 'dark' ? 'bg-accent-8' : 'bg-accent-0'
       )}
     >
       <Container>
@@ -75,7 +44,7 @@ const UserReviews: FC<Props> = ({
           <h2
             className={cn(
               'font-bold text-center text-4xl leading-snug tracking-tight md:text-6xl md:max-w-xl md:text-left -mt-3',
-              theme === 'dark' ? 'text-accent-9' : 'text-accent-1'
+              theme === 'dark' ? 'text-accent-1' : 'text-accent-9'
             )}
           >
             {title}
@@ -83,7 +52,7 @@ const UserReviews: FC<Props> = ({
           <div
             className={cn(
               'mt-4 text-xl text-center leading-8 text-accent-7 mb-4 lg:max-w-4xl lg:text-left',
-              theme === 'dark' ? 'text-accent-7' : 'text-accent-2'
+              theme === 'dark' ? 'text-accent-2' : 'text-accent-7'
             )}
           >
             <p>{description}</p>
@@ -102,73 +71,79 @@ const UserReviews: FC<Props> = ({
           modules={[Pagination, Navigation]}
           className="mySwiper"
         >
-          {reviews.map((review, i) => (
-            <SwiperSlide key={i}>
-              {({ isActive }) => (
-                <div
-                  className={cn(
-                    'relative w-full',
-                    mediaSize === 'sm'
-                      ? 'h-[30vh]'
-                      : mediaSize === 'md'
-                      ? 'h-[40vh]'
-                      : mediaSize === 'lg'
-                      ? 'h-[70vh]'
-                      : '',
-                    'lg:h-[60vh]'
-                  )}
-                >
-                  <ReactPlayer
-                    url={
-                      review.video ||
-                      'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'
-                    }
-                    muted={isMuted || !isActive}
-                    playing={isActive}
-                    autoPlay={isActive}
-                    loop={isActive}
-                    controls={false}
-                    playsInline={isActive}
-                    height={'100%'}
-                    width={'100%'}
-                    className={'h-full w-full object-cover'}
-                  />
-                  <button
-                    className={
-                      'absolute w-12 h-12 left-4 bottom-[108px] bg-accent-0 opacity-70 p-3 rounded-md'
-                    }
-                    onClick={() => {
-                      setIsMuted(!isMuted)
-                    }}
+          {reviews.length > 0 &&
+            reviews.map((review) => (
+              <SwiperSlide key={review.id}>
+                {({ isActive }) => (
+                  <div
+                    className={cn(
+                      'relative w-full',
+                      mediaSize === 'sm'
+                        ? 'h-[30vh]'
+                        : mediaSize === 'md'
+                        ? 'h-[40vh]'
+                        : mediaSize === 'lg'
+                        ? 'h-[70vh]'
+                        : '',
+                      'lg:h-[60vh]'
+                    )}
                   >
-                    <img
-                      width={48}
-                      height={48}
-                      src={
-                        isMuted
-                          ? '/images/icons/volume-off.svg'
-                          : '/images/icons/volume-on.svg'
+                    {
+                      <ReactPlayer
+                        url={review.video.data.attributes.url}
+                        muted={isMuted || !isActive}
+                        playing={isActive}
+                        autoPlay={isActive}
+                        loop={isActive}
+                        controls={false}
+                        playsInline={isActive}
+                        height={'100%'}
+                        width={'100%'}
+                        className={'h-full w-full object-cover'}
+                      />
+                    }
+                    <button
+                      className={
+                        'absolute w-12 h-12 left-4 bottom-[108px] bg-accent-0 opacity-70 p-3 rounded-md'
                       }
-                    />
-                  </button>
-                  <div className={styles.product}>
-                    <span>
-                      <strong className="text-accent-1">
-                        {review.product}
-                      </strong>
-                      <p className="text-accent-1">{review.description}</p>
-                    </span>
-                    <Button
-                      variant="slim"
-                      style={{ paddingLeft: '1.5em', paddingRight: '1.5em' }}
+                      onClick={() => {
+                        setIsMuted(!isMuted)
+                      }}
                     >
-                      See product
-                    </Button>
+                      <img
+                        width={48}
+                        height={48}
+                        src={
+                          isMuted
+                            ? '/images/icons/volume-off.svg'
+                            : '/images/icons/volume-on.svg'
+                        }
+                      />
+                    </button>
+                    <div className={styles.product}>
+                      <span>
+                        <strong className="text-accent-1">
+                          {review?.product}
+                        </strong>
+                        <p className="text-accent-1">{review?.description}</p>
+                      </span>
+                      {
+                        <Button
+                          variant="slim"
+                          href={review.productLink}
+                          style={{
+                            paddingLeft: '1.5em',
+                            paddingRight: '1.5em',
+                          }}
+                        >
+                          See product
+                        </Button>
+                      }
+                    </div>
                   </div>
-                </div>
-              )}
-            </SwiperSlide>
-          ))}
+                )}
+              </SwiperSlide>
+            ))}
         </Swiper>
       </>
     </div>

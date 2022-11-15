@@ -1,25 +1,15 @@
-import React, {
-  CSSProperties,
-  DetailedHTMLProps,
-  FC,
-  HtmlHTMLAttributes,
-} from 'react'
-import { Container } from '@components/ui'
+import React, { FC } from 'react'
 import { useState, useEffect, useCallback } from 'react'
 import Image from 'next/image'
-import { ArrowRight } from '@components/icons'
 import Button from '@components/ui/Button'
-import cn from 'clsx'
-import s from './Hero.module.css'
-import Link from 'next/link'
 
 interface Props {
-  title?: string
+  title: string
   description?: string
   customStyle?: React.CSSProperties
-  image?: string
+  image: string
   imageDesktop?: string
-  blurPlaceholder?: string
+  blurPlaceholder: string
   blurPlaceholderDesktop?: string
   differentOnDesktop?: boolean
   cta?: string
@@ -29,7 +19,7 @@ interface Props {
 const useMediaQuery = (width: number) => {
   const [targetReached, setTargetReached] = useState(false)
 
-  const updateTarget = useCallback((e) => {
+  const updateTarget = useCallback((e: any) => {
     if (e.matches) {
       setTargetReached(true)
     } else {
@@ -52,7 +42,7 @@ const useMediaQuery = (width: number) => {
   return targetReached
 }
 
-const HeroImage: FC<Props> = ({
+const Hero: FC<Props> = ({
   title,
   image,
   differentOnDesktop = false,
@@ -77,7 +67,7 @@ const HeroImage: FC<Props> = ({
           layout="fill"
           objectFit="cover"
           objectPosition="center"
-          alt={title}
+          alt={title || 'image'}
           placeholder="blur"
           blurDataURL={blurPlaceholder}
         />
@@ -89,7 +79,7 @@ const HeroImage: FC<Props> = ({
           layout="fill"
           objectFit="cover"
           objectPosition="center"
-          alt={title}
+          alt={title || 'image'}
           placeholder="blur"
           blurDataURL={blurPlaceholder}
         />
@@ -101,7 +91,7 @@ const HeroImage: FC<Props> = ({
           layout="fill"
           objectFit="cover"
           objectPosition="center"
-          alt={title}
+          alt={title || 'image'}
           placeholder="blur"
           blurDataURL={blurPlaceholderDesktop}
         />
@@ -110,7 +100,7 @@ const HeroImage: FC<Props> = ({
         <p className="font-bold text-3xl text-accent-1 leading-none text-left lg:text-6xl">
           {title}
         </p>
-        <Button theme="light" variant="outlineSlim">
+        <Button href={link} theme="light" variant="outlineSlim">
           {cta}
         </Button>
       </div>
@@ -118,4 +108,4 @@ const HeroImage: FC<Props> = ({
   )
 }
 
-export default HeroImage
+export default Hero
